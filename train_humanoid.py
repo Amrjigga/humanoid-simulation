@@ -15,6 +15,7 @@ class HumanoidEnv(gym.Env):
         
         # Action space: For simplicity, assume we control certain joints with continuous torques
         # Replace with actual number of controllable joints and action range
+        # ok im defining the actions here, 10 means 10 controlable joints 
         self.action_space = gym.spaces.Box(low=-1, high=1, shape=(10,), dtype=np.float32)
         
         # Observation space: This might include joint positions, velocities, torso orientation, etc.
@@ -54,12 +55,14 @@ class HumanoidEnv(gym.Env):
         obs = self._get_obs()
         return obs
 
+
+#executes a single step in the environment, simulating the given action
     def step(self, action):
         # Apply action (torques) to humanoid joints
         # For now, just do nothing or apply a placeholder
         # You will need to identify joint indices and apply torque with `p.setJointMotorControl2`.
         
-        # Step simulation
+        # Step simulation, advances sim in time. like wolfram defines time. computational irreducibility 
         p.stepSimulation()
         self._step_counter += 1
         
